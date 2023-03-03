@@ -14,6 +14,7 @@ class `66_Plus _One` {
                 Arguments.of(intArrayOf(5, 6, 7, 8)),
                 Arguments.of(intArrayOf(9, 9, 9, 9)),
                 Arguments.of(intArrayOf(9, 9, 8, 9)),
+                Arguments.of(intArrayOf(9, 0, 9, 9)),
             )
         }
     }
@@ -27,28 +28,16 @@ class `66_Plus _One` {
     }
 
     fun plusOne(digits: IntArray): IntArray {
-        val destination = LinkedList<Int>()
-        var isNextInc: Boolean = false
-        var checkIsAlive: Boolean = true
-        var temp: Int = 0
-        for (digit in digits.reversed()) {
-            if (checkIsAlive) {
-                if (digit + 1 == 10) {
-                    temp = 0
-                    isNextInc = true
-                } else {
-                    temp = digit + 1
-                    isNextInc = false
-                }
+        for (i in digits.indices.reversed()) {
+            if (digits[i] + 1 == 10) {
+                digits[i] = 0
             } else {
-                temp = digit
+                digits[i]++
+                return digits
             }
-            checkIsAlive = isNextInc;
-            destination.addFirst(temp)
         }
-        if (isNextInc) {
-            destination.addFirst(1)
-        }
-        return destination.toIntArray()
+        val intArray = IntArray(digits.size + 1)
+        intArray[0] = 1
+        return intArray;
     }
 }
