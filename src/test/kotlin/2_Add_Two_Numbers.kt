@@ -10,8 +10,9 @@ class `2_Add_Two_Numbers` {
         @JvmStatic
         fun testValues(): List<Arguments> {
             return listOf(
-//                Arguments.of(listNode(2, 3, 4), listNode(5, 5, 5, 5, 5, 5)),
+                Arguments.of(listNode(2, 3, 4), listNode(5, 5, 5, 5, 5, 5)),
                 Arguments.of(listNode(5, 5, 5, 5, 5, 5), listNode(2, 3, 4)),
+                Arguments.of(listNode(9, 9, 9, 9, 9, 9, 9), listNode(9, 9, 9, 9)),
             )
         }
 
@@ -60,22 +61,21 @@ class `2_Add_Two_Numbers` {
                 listNode.next = transferObj.listNode
                 TransferObj(0, listNode, transferObj.depth)
             }
-        } else {
-            val sum = if (depthL1 >= 0) {
-                l1.`val` + l2.`val`
-            } else {
-                l2.`val`
-            }
-            val next = l2.next
+        } else if (limit >= 0) {
+            val sum = l1.`val` + l2.`val`
             return if (sum > 9) {
                 val listNode = ListNode(sum - 10)
-                listNode.next = next
+                listNode.next = l2.next
                 TransferObj(1, listNode, depthL2)
             } else {
                 val listNode = ListNode(sum)
-                listNode.next = next
+                listNode.next = l2.next
                 TransferObj(0, listNode, depthL2)
             }
+        } else {
+            val listNode = ListNode(l1.`val`)
+            listNode.next = l2
+            return TransferObj(0, listNode, depthL2)
         }
     }
 }
