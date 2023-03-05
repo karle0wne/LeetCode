@@ -34,7 +34,7 @@ class `2_Add_Two_Numbers` {
     }
 
     fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
-        return round(l1!!, l2!!, 0)
+        return round(l1, l2, 0)
     }
 
     fun round(l1: ListNode?, l2: ListNode?, unitItMind: Int): ListNode? {
